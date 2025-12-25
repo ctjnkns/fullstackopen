@@ -1,43 +1,38 @@
-const Hello = (props) => {
-  console.log(props)
-  return (
-    <div>
-      <p>
-        Hello {props.name}, you are {props.age} years old
-      </p>
-    </div>
-  )
-}
+import { useState } from 'react'
 
-const Footer = () => {
+const Display = ({ value }) => <div>{value}</div>
+
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
+
+const History = (props) => {
+  if (props.allClicks.length === 0) {
+    return (
+      <div>
+        the app is used by pressing the buttons
+      </div>
+    )
+  }
   return (
     <div>
-      greeting app created by <a href='https://github.com/ctjnkns'>ctjnkns</a>
+      button press history: {props.allClicks.join(' ')}
     </div>
   )
 }
 
 const App = () => {
-  // const friends = [
-  //   { name: 'Peter', age: 4 },
-  //   { name: 'Maya', age: 10 },
-  // ]
-  const friends = [ 'Peter', 'Maya']
+  const [value, setValue] = useState(10)
 
+  const setToValue = (newValue) => {
+    console.log('value now', newValue)
+    setValue(newValue)
+  }
 
   return (
-    // <>
-    //   <p>Greetings</p>
-    //   <Hello name='Maya' age={26+10} />
-    //   <Hello name={name} age={age} />
-    //   <Footer />
-    // </>
-    // <>
-    // <p>{friends[0].name} {friends[0].age}</p>
-    // <p>{friends[1].name} {friends[1].age}</p>
-    // </>
-      <div>
-      <p>{friends}</p>
+    <div>
+      <Display value={value}/>
+      <Button onClick={() => setToValue(1000)} text="thousand" />
+      <Button onClick={() => setToValue(0)} text="reset" />
+      <Button onClick={() => setToValue(value + 1)} text="increment"/>
     </div>
   )
 }
