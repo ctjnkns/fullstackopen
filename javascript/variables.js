@@ -14,7 +14,7 @@ t.forEach(function (value) {
 })
 const t2 = t.concat(5)  
 
-const t3 = t.filter(function (value) {
+const t4 = t2.filter(function (value) {
     return value > 1
 })
 
